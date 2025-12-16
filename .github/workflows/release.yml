@@ -1,0 +1,67 @@
+name: Release
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # 1. Calculate Next Version based on Conventional Commits
+      - name: Calculate Version
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v6.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          dry_run: true
+          tag_prefix: ""
+
+      # 2. Update POM & Build
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '8'
+          distribution: 'temurin'
+#          server-id: ossrh
+#          server-username: MAVEN_USERNAME
+#          server-password: MAVEN_PASSWORD
+#          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
+#          gpg-passphrase: ${{ secrets.GPG_PASSPHRASE }}
+
+      - name: Update POM Version
+        run: mvn versions:set -DnewVersion=${{ steps.tag_version.outputs.new_version }} -DgenerateBackupPoms=false
+
+      # 3. Deploy to Maven Central
+      - name: Publish to Maven Central
+#        run: mvn -B deploy --file pom.xml -Prelease
+        run: mvn -B clean install --file pom.xml
+#        env:
+#          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+#          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+
+      # 4. Create Git Tag
+      - name: Push Tag
+        uses: mathieudutour/github-tag-action@v6.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          custom_tag: ${{ steps.tag_version.outputs.new_version }}
+          tag_prefix: ""
+
+      # 5. JReleaser (GitHub Release & Changelog)
+      - name: Run JReleaser
+        uses: jreleaser/release-action@v2
+        with:
+          arguments: full-release
+        env:
+          JRELEASER_PROJECT_VERSION: ${{ steps.tag_version.outputs.new_version }}
+          JRELEASER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

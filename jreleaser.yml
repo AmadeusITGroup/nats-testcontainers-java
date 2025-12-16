@@ -1,0 +1,28 @@
+project:
+  name: nats-testcontainers
+  description: Testcontainers module for NATS messaging system
+  longDescription: |
+    Testcontainers module for NATS messaging system.
+    Provides easy NATS container setup for integration testing with JetStream support.
+  links:
+    homepage: https://github.com/AmadeusITGroup/nats-testcontainers
+  authors:
+    - Kevin Ferrare from Amadeus IT Group (https://amadeus.com)
+  license: Apache-2.0
+  languages:
+    java:
+      groupId: org.amadeus.testcontainers
+      artifactId: nats
+
+release:
+  github:
+    owner: AmadeusITGroup
+    name: nats-testcontainers
+    overwrite: true
+    tagName: '{{projectVersion}}'
+    releaseName: '{{projectVersion}}'
+    changelog:
+      formatted: ALWAYS
+      preset: conventional-commits
+      contributors:
+        enabled: true
