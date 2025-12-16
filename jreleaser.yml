@@ -1,0 +1,75 @@
+project:
+  name: nats-testcontainers-java
+  description: Testcontainers module for NATS messaging system
+  longDescription: |
+    Testcontainers module for NATS messaging system.
+    Provides easy NATS container setup for integration testing with JetStream support.
+  links:
+    homepage: https://github.com/AmadeusITGroup/nats-testcontainers-java
+  authors:
+    - Kevin Ferrare from Amadeus IT Group (https://amadeus.com)
+  license: Apache-2.0
+  languages:
+    java:
+      version: 8
+      groupId: io.github.amadeusitgroup.testcontainers
+      artifactId: nats
+
+release:
+  github:
+    owner: AmadeusITGroup
+    name: nats-testcontainers-java
+    overwrite: true
+    tagName: '{{projectVersion}}'
+    releaseName: '{{projectVersion}}'
+    changelog:
+      formatted: ALWAYS
+      contributors:
+        format: '- {{contributorName}}{{#contributorUsernameAsLink}} ({{.}}){{/contributorUsernameAsLink}}'
+      labelers:
+        - label: feat
+          title: '^feat'
+        - label: fix
+          title: '^fix'
+        - label: chore
+          title: '^chore'
+        - label: refactor
+          title: '^refactor'
+        - label: ci
+          title: '^ci'
+        - label: build
+          title: '^build'
+        - label: test
+          title: '^test'
+        - label: deps
+          title: '^deps'
+      categories:
+        - title: '🚀 Features'
+          labels:
+            - 'feat'
+        - title: '🐛 Fixes'
+          labels:
+            - 'fix'
+        - title: '🧰 Maintenance'
+          labels:
+            - 'chore'
+            - 'deps'
+            - 'build'
+            - 'ci'
+            - 'refactor'
+            - 'test'
+
+signing:
+  active: ALWAYS
+  armored: true
+
+#deploy:
+#  maven:
+#    nexus2:
+#      maven-central:
+#        active: ALWAYS
+#        url: https://s01.oss.sonatype.org/service/local
+#        closeRepository: true
+#        releaseRepository: true
+#        stagingRepositories:
+#          - target/staging-deploy
