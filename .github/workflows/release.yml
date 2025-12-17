@@ -20,7 +20,7 @@ jobs:
       # 1. Calculate Next Version based on Conventional Commits
       - name: Calculate Version
         id: tag_version
-        uses: mathieudutour/github-tag-action@v6.1
+        uses: mathieudutour/github-tag-action@v6.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           dry_run: true
@@ -51,7 +51,7 @@ jobs:
 
       # 4. Create Git Tag
       - name: Push Tag
-        uses: mathieudutour/github-tag-action@v6.1
+        uses: mathieudutour/github-tag-action@v6.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           custom_tag: ${{ steps.tag_version.outputs.new_version }}
