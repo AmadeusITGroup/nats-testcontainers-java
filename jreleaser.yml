@@ -13,7 +13,7 @@ project:
     java:
       version: 8
       groupId: io.github.amadeusitgroup.testcontainers
-      artifactId: nats
+      artifactId: nats-testcontainers-java
 
 release:
   github:
@@ -58,18 +58,18 @@ release:
             - 'ci'
             - 'refactor'
             - 'test'
+      hide:
+        uncategorized: false
 
 signing:
   active: ALWAYS
   armored: true
 
-#deploy:
-#  maven:
-#    nexus2:
-#      maven-central:
-#        active: ALWAYS
-#        url: https://s01.oss.sonatype.org/service/local
-#        closeRepository: true
-#        releaseRepository: true
-#        stagingRepositories:
-#          - target/staging-deploy
+deploy:
+  maven:
+    mavenCentral:
+      sonatype:
+        active: ALWAYS
+        url: https://central.sonatype.com/api/v1/publisher
+        stagingRepositories:
+          - target/staging-deploy
