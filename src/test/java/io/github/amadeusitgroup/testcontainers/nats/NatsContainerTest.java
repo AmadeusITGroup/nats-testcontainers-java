@@ -155,4 +155,46 @@ class NatsContainerTest {
           );
     }
   }
+
+  @Test
+  void shouldStartWithStringImageName() {
+    try (NatsContainer natsContainer = new NatsContainer("nats:2.12.1")) {
+      natsContainer.start();
+
+      assertThat(natsContainer.getClientPort()).isNotNull();
+      assertThat(natsContainer.getConnectionUrl()).startsWith("nats://");
+    }
+  }
+
+  @Test
+  void shouldEnableDebugMode() throws IOException, InterruptedException, TimeoutException {
+    try (NatsContainer natsContainer = new NatsContainer(NATS_IMAGE).withDebug()) {
+      natsContainer.start();
+
+      // Verify container started successfully with debug flag
+      assertThat(natsContainer.isRunning()).isTrue();
+
+      // Verify basic connectivity still works
+      Options options = new Options.Builder().server(natsContainer.getConnectionUrl()).build();
+      try (Connection nc = Nats.connect(options)) {
+        assertThat(nc.getStatus()).isEqualTo(Connection.Status.CONNECTED);
+      }
+    }
+  }
+
+  @Test
+  void shouldEnableProtocolTracing() throws IOException, InterruptedException, TimeoutException {
+    try (NatsContainer natsContainer = new NatsContainer(NATS_IMAGE).withProtocolTracing()) {
+      natsContainer.start();
+
+      // Verify container started successfully with protocol tracing flag
+      assertThat(natsContainer.isRunning()).isTrue();
+
+      // Verify basic connectivity still works
+      Options options = new Options.Builder().server(natsContainer.getConnectionUrl()).build();
+      try (Connection nc = Nats.connect(options)) {
+        assertThat(nc.getStatus()).isEqualTo(Connection.Status.CONNECTED);
+      }
+    }
+  }
 }

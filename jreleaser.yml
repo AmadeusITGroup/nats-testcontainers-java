@@ -13,7 +13,7 @@ project:
     java:
       version: 8
       groupId: io.github.amadeusitgroup.testcontainers
-      artifactId: nats-testcontainers-java
+      artifactId: nats
 
 release:
   github:

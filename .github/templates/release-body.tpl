@@ -8,7 +8,7 @@
 
 - **Build Timestamp**: {{timestamp}}
 - **Git Commit**: {{commitShortHash}}
-- **Workflow Run**: {{#Env.GITHUB_RUN_NUMBER}}[#{{Env.GITHUB_RUN_NUMBER}}]({{repoUrl}}/actions/runs/{{Env.GITHUB_RUN_NUMBER}}){{/Env.GITHUB_RUN_NUMBER}}{{^Env.GITHUB_RUN_NUMBER}}N/A{{/Env.GITHUB_RUN_NUMBER}}
+- **Workflow Run**: {{#Env.GITHUB_RUN_ID}}[#{{Env.GITHUB_RUN_NUMBER}}]({{repoUrl}}/actions/runs/{{Env.GITHUB_RUN_ID}}){{/Env.GITHUB_RUN_ID}}{{^Env.GITHUB_RUN_ID}}N/A{{/Env.GITHUB_RUN_ID}}
 - **Java Version**: {{projectJavaVersion}}
 
 ## 🏗️ Build Environment
@@ -18,12 +18,26 @@
 - **Repository**: {{repoUrl}}
 - **Event**: {{#Env.GITHUB_EVENT_NAME}}{{Env.GITHUB_EVENT_NAME}}{{/Env.GITHUB_EVENT_NAME}}{{^Env.GITHUB_EVENT_NAME}}release{{/Env.GITHUB_EVENT_NAME}}
 
+## 📊 Quality Metrics
+
+- **Line Coverage**: {{#Env.COVERAGE_PERCENT}}{{Env.COVERAGE_PERCENT}}%{{/Env.COVERAGE_PERCENT}}{{^Env.COVERAGE_PERCENT}}N/A{{/Env.COVERAGE_PERCENT}}
+
 ---
 
 ## 📦 Maven Central
 
-- **Coordinates**: `io.github.amadeusitgroup.testcontainers:nats-testcontainers-java:{{projectVersion}}`
-- **Artifact**: https://central.sonatype.com/artifact/io.github.amadeusitgroup.testcontainers/nats-testcontainers-java/{{projectVersion}}
+**Coordinates**: `io.github.amadeusitgroup.testcontainers:nats:{{projectVersion}}`
+
+```xml
+<dependency>
+    <groupId>io.github.amadeusitgroup.testcontainers</groupId>
+    <artifactId>nats</artifactId>
+    <version>{{projectVersion}}</version>
+    <scope>test</scope>
+</dependency>
+```
+
+**Browse on Maven Central**: [io.github.amadeusitgroup.testcontainers:nats:{{projectVersion}}](https://central.sonatype.com/artifact/io.github.amadeusitgroup.testcontainers/nats/{{projectVersion}})
 
 ---
 
@@ -31,10 +45,10 @@
 
 ### Main Artifacts
 
-- **JAR**: `nats-testcontainers-java-{{projectVersion}}.jar`
-- **Sources**: `nats-testcontainers-java-{{projectVersion}}-sources.jar`
-- **Javadoc**: `nats-testcontainers-java-{{projectVersion}}-javadoc.jar`
-- **POM**: `nats-testcontainers-java-{{projectVersion}}.pom`
+- **JAR**: `nats-{{projectVersion}}.jar`
+- **Sources**: `nats-{{projectVersion}}-sources.jar`
+- **Javadoc**: `nats-{{projectVersion}}-javadoc.jar`
+- **POM**: `nats-{{projectVersion}}.pom`
 
 ### Signatures
 
@@ -54,7 +68,7 @@ All artifacts are signed with GPG:
 All artifacts are signed with GPG. You can verify signatures using:
 
 ```bash
-gpg --verify nats-testcontainers-java-{{projectVersion}}.jar.asc nats-testcontainers-java-{{projectVersion}}.jar
+gpg --verify nats-{{projectVersion}}.jar.asc nats-{{projectVersion}}.jar
 ```
 
 All artifacts are also available in Maven Central alongside their signatures.
