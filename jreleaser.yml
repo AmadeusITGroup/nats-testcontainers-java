@@ -22,8 +22,12 @@ release:
     overwrite: true
     tagName: '{{projectVersion}}'
     releaseName: '{{projectVersion}}'
+    releaseNotes:
+      enabled: true
+      configurationFile: .github/templates/release-body.tpl
     changelog:
       formatted: ALWAYS
+      enabled: false
       contributors:
         format: '- {{contributorName}}{{#contributorUsernameAsLink}} ({{.}}){{/contributorUsernameAsLink}}'
       labelers:
