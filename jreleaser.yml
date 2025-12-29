@@ -62,6 +62,15 @@ release:
             - 'test'
       hide:
         uncategorized: false
+      replacers:
+        - search: '<groupId>'
+          replace: '    <groupId>'
+        - search: '<artifactId>'
+          replace: '    <artifactId>'
+        - search: '<version>'
+          replace: '    <version>'
+        - search: '<scope>'
+          replace: '    <scope>'
 
 signing:
   active: ALWAYS
