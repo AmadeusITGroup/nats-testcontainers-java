@@ -56,7 +56,7 @@
 
         <testcontainers.version>2.0.5</testcontainers.version>
         <jnats.version>2.25.3</jnats.version>
-        <junit.version>6.1.1</junit.version>
+        <junit.version>6.1.2</junit.version>
         <assertj.version>3.27.7</assertj.version>
         <altDeploymentRepository>local::default::file:./target/staging-deploy</altDeploymentRepository>
     </properties>
