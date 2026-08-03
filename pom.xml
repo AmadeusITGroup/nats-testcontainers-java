@@ -55,7 +55,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <testcontainers.version>2.0.5</testcontainers.version>
-        <jnats.version>2.25.3</jnats.version>
+        <jnats.version>2.26.0</jnats.version>
         <junit.version>6.1.2</junit.version>
         <assertj.version>3.27.7</assertj.version>
         <altDeploymentRepository>local::default::file:./target/staging-deploy</altDeploymentRepository>
